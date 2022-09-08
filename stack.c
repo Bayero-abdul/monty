@@ -12,7 +12,7 @@ void push(stack_s **stack, unsigned int line_number)
 	stack_s *new_node;
 	(void)line_number;
 
-	if (!is_num() || global->toks[1] == NULL) /* assign integer to a variable */
+	if (is_num() == -1 || global->toks[1] == NULL)
 	{
 		if (*stack != NULL)
 			free_stack(*stack);
