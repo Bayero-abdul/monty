@@ -1,5 +1,6 @@
 #define _GNU_SOURCE
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include "monty.h"
 
@@ -13,7 +14,7 @@ line_s global[] = {{NULL, {NULL, NULL}}};
  */
 int main(int argc, char *argv[])
 {
-	char line[100];
+	char line[20];
 	ssize_t nread;
 	stack_s *stack = NULL;
 	unsigned int line_number = 1;
@@ -36,19 +37,19 @@ int main(int argc, char *argv[])
 	{
 		if (line[nread - 1] == '\n')
 			line[nread - 1] = '\0';
-
 		if (line[0] != '\0')
 		{
 			parse(line);
+			if (global->toks[0][0] == ' ')
+				continue;
 			f = exec_op_func();
 			if (f == NULL)
 			{
 				free_stack(stack);
 				err_unknown(line_number);
 			}
-			f(&stack, line_number);
+			f(&stack, line_number++);
 		}
-		line_number++;
 	}
 	free_stack(stack);
 	fclose(global->stream);
