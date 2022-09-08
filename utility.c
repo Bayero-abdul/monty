@@ -9,15 +9,12 @@
  */
 int is_num(void)
 {
-	int i;
 	char *num = global->toks[1];
 
-	for (i = 0; num[i] != '\0'; i++)
-	{
-		if (num[i] < '0' || num[i] > '9')
-			return (0);
-	}
-	return (1);
+	if (atoi(num) == 0)
+		return (-1);
+	else
+		return (0);
 }
 
 
