@@ -15,16 +15,13 @@ line_s global[] = {{NULL, {NULL, NULL}}};
 int main(int argc, char *argv[])
 {
 	char line[20];
-	ssize_t nread;
 	stack_s *stack = NULL;
 	unsigned int line_number = 1;
+	ssize_t nread;
 	void (*f)(stack_s **stack, unsigned int line_number);
 
 	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+		err_usage();
 
 	global->stream = fopen(argv[1], "r");
 	if (global->stream == NULL)
@@ -41,7 +38,10 @@ int main(int argc, char *argv[])
 		{
 			parse(line);
 			if (global->toks[0][0] == ' ')
+			{
+				line_number++;
 				continue;
+			}
 			f = exec_op_func();
 			if (f == NULL)
 			{
@@ -54,4 +54,13 @@ int main(int argc, char *argv[])
 	free_stack(stack);
 	fclose(global->stream);
 	exit(EXIT_SUCCESS);
+}
+
+/**
+ * err_usage - usage error
+ */
+void err_usage(void)
+{
+	fprintf(stderr, "USAGE: monty file\n");
+	exit(EXIT_FAILURE);
 }
