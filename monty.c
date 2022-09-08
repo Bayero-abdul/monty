@@ -29,7 +29,6 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 	    exit(EXIT_FAILURE);
 	}
-
 	while ((nread = get_line(line, global->stream)) != -1)
 	{
 		if (line[nread - 1] == '\n')
@@ -50,7 +49,7 @@ int main(int argc, char *argv[])
 			}
 			f(&stack, line_number++);
 		}
-		line_number;
+		line_number++;
 	}
 	free_stack(stack);
 	fclose(global->stream);
