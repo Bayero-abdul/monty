@@ -29,7 +29,7 @@ int is_num(void)
  */
 int get_line(char *lineptr, FILE *stream)
 {
-	if (fgets(lineptr, 200, stream) == NULL)
+	if (fgets(lineptr, 1024, stream) == NULL)
 		return (-1);
 	return (strlen(lineptr));
 }
