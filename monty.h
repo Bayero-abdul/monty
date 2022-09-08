@@ -54,6 +54,9 @@ extern line_s global[];
 /* parse function */
 void parse(char *line);
 
+/* monty.c */
+void err_usage(void);
+
 /* stack functions */
 void push(stack_s **stack, unsigned int line_number);
 void pall(stack_s **stack, unsigned int line_number);
