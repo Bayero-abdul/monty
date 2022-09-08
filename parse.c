@@ -8,16 +8,17 @@
  * @line: instruction
  * Return: void
  */
-void parse(char *line)
+void parse(char line[])
 {
 	char *token = NULL;
+	char *delimit = " \t\r\n\v\f";
 	unsigned int i = 0;
 
-	token = strtok(line, " ");
+	token = strtok(line, delimit);
 	while (token != NULL && i < 2)
 	{
 		global->toks[i] = token;
-		token = strtok(NULL, " ");
+		token = strtok(NULL, delimit);
 		i++;
 	}
 }
