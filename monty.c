@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 				free_stack(stack);
 				err_unknown(line_number);
 			}
-			f(&stack, line_number++);
+			f(&stack, line_number);
 		}
 		line_number++;
 	}
