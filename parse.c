@@ -10,15 +10,7 @@
  */
 void parse(char line[])
 {
-	char *token = NULL;
-	char *delimit = " \t\r\n\v\f";
-	unsigned int i = 0;
-
-	token = strtok(line, delimit);
-	while (token != NULL && i < 2)
-	{
-		global->toks[i] = token;
-		token = strtok(NULL, delimit);
-		i++;
-	}
+	global->toks[0] = strtok(line, " \t\n");
+	if (global->toks[0] != NULL)
+		global->toks[1] =  strtok(NULL, " \t\n");
 }

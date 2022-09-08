@@ -31,25 +31,24 @@ int main(int argc, char *argv[])
 	}
 	while ((nread = get_line(line, global->stream)) != -1)
 	{
-		if (line[nread - 1] == '\n')
-			line[nread - 1] = '\0';
-		if (line[0] != '\0')
+		if (line[nread - 1] != '\n')
 		{
-			parse(line);
-			if (global->toks[0][0] == ' ')
-			{
-				line_number++;
-				continue;
-			}
-			f = exec_op_func();
-			if (f == NULL)
-			{
-				free_stack(stack);
-				err_unknown(line_number);
-			}
-			f(&stack, line_number);
+			line_number++;
+			continue;
 		}
-		line_number++;
+		parse(line);
+		if (!global->toks[0] || *global->toks[0] == '#')
+		{
+			line_number++;
+			continue;
+		}
+		f = exec_op_func();
+		if (f == NULL)
+		{
+			free_stack(stack);
+			err_unknown(line_number);
+		}
+		f(&stack, line_number++);
 	}
 	free_stack(stack);
 	fclose(global->stream);
