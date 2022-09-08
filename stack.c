@@ -17,7 +17,7 @@ void push(stack_s **stack, unsigned int line_number)
 		if (*stack != NULL)
 			free_stack(*stack);
 		fclose(global->stream);
-		fprintf(stderr, "L<%d>: usage: push integer\n", line_number);
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
