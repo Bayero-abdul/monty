@@ -37,10 +37,11 @@ int main(int argc, char *argv[])
 	{
 		if (line[nread - 1] == '\n')
 			line[nread - 1] = '\0';
-
 		if (line[0] != '\0')
 		{
 			parse(line);
+			if (global->toks[0][0] == ' ')
+				continue;
 			f = exec_op_func();
 			if (f == NULL)
 			{
