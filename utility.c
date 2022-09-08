@@ -11,7 +11,7 @@ int is_num(void)
 {
 	char *num = global->toks[1];
 
-	if (atoi(num) == 0)
+	if (*num != '0' && atoi(num) == 0)
 		return (-1);
 	else
 		return (0);
