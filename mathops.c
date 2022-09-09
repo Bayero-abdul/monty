@@ -123,7 +123,7 @@ void mod_s(stack_s **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	mod = (*stack)->next->n * (*stack)->n;
+	mod = (*stack)->next->n % (*stack)->n;
 	(*stack)->next->n = mod;
 	temp = *stack;
 	*stack = (*stack)->next;
