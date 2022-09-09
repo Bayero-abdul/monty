@@ -24,8 +24,6 @@ int is_num(void)
 	return (0);
 }
 
-
-
 /**
  * free_stack - frees the stack
  * @stack: stack

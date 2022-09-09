@@ -42,16 +42,16 @@ typedef struct instruction_s
  *
  * Description: file stream and tokens for opcode
  */
-typedef struct line_s
+typedef struct global_s
 {
 	FILE *stream;
 	char *opcode;
 	char *argument;
 	char *line;
-} line_s;
+} global_s;
 
 /* global varaible */
-extern line_s global;
+extern global_s global;
 
 /* stack functions */
 void push(stack_s **stack, unsigned int line_number);
@@ -62,6 +62,13 @@ void pint(stack_s **stack, unsigned int line_number);
 /* ops.c */
 void swap(stack_s **stack, unsigned int line_number);
 
+/* mathops.c */
+void add_s(stack_s **stack, unsigned int line_number);
+void sub_s(stack_s **stack, unsigned int line_number);
+void div_s(stack_s **stack, unsigned int line_number);
+void mul_s(stack_s **stack, unsigned int line_number);
+void mod_s(stack_s **stack, unsigned int line_number);
+
 /* exec_funcs */
 void (*exec_op_func(void))(stack_s **stack, unsigned int line_number);
 
@@ -70,7 +77,6 @@ void err_malloc(void);
 void err_open(char *filename);
 void err_usage(void);
 void err_unknown(unsigned int line_number);
-void err_less_than_2(unsigned int line_number);
 
 /* utility functions */
 int is_num(void);

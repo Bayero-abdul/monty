@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "monty.h"
 
-line_s global = {NULL, NULL, NULL, NULL};
+global_s global = {NULL, NULL, NULL, NULL};
 
 /**
  * main - runs the monty program
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 		}
 
 		global.opcode = strtok(global.line, " \t\n");
-		if (!global.opcode)
+		if (!global.opcode || *global.opcode == '#' || !strcmp(global.opcode, "nop"))
 		{
 			line_number++;
 			continue;
