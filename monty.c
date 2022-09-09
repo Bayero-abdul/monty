@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 
 	while ((nread = getline(&line, &len, global.stream)) != -1)
 	{
-		if (*line == '\n')
+		if (*line != '\n')
 		{
 			global.opcode = strtok(line, " \t\n");
 			if (!global.opcode)
