@@ -12,6 +12,9 @@ int is_num(void)
 {
 	char *num = global.argument;
 
+	if (*num == '-')
+		num++;
+
 	while (*num != '\0')
 	{
 		if (!isdigit(*num) && atoi(num) == 0)

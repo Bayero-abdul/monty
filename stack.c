@@ -12,7 +12,7 @@ void push(stack_s **stack, unsigned int line_number)
 	stack_s *new_node;
 	(void)line_number;
 
-	if (is_num() == -1 || global.argument == NULL)
+	if (global.argument == NULL || is_num() == -1)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
