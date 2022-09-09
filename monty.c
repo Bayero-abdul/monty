@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 		if (*line != '\n')
 		{
 			global.opcode = strtok(line, " \t\n");
-			if (!global.opcode)
+			if (!global.opcode || *global.opcode == '#')
 			{
 				line_number++;
 				continue;
