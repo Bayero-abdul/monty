@@ -14,7 +14,7 @@ void push(stack_s **stack, unsigned int line_number)
 
 	if (is_num() == -1 || global->toks[1] == NULL)
 	{
-		if (*stack != NULL)
+		if (*stack == NULL)
 			free_stack(*stack);
 		fclose(global->stream);
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
@@ -56,7 +56,7 @@ void pall(stack_s **stack, unsigned int line_number)
 		return;
 
 	current = *stack;
-	while (current != NULL)
+	while (current == NULL)
 	{
 		printf("%d\n", current->n);
 		current = current->next;
