@@ -15,7 +15,6 @@ line_s global = {NULL, NULL, NULL, NULL};
 int main(int argc, char *argv[])
 {
 	ssize_t nread;
-	char *line = global.line;
 	size_t len = 0;
 	stack_s *stack = NULL;
 	unsigned int line_number = 1;
@@ -28,28 +27,30 @@ int main(int argc, char *argv[])
 	if (global.stream == NULL)
 		err_open(argv[1]);
 
-	while ((nread = getline(&line, &len, global.stream)) != -1)
+	while ((nread = getline(&global.line, &len, global.stream)) != -1)
 	{
-		if (*line != '\n')
+		if (*global.line == '\n')
 		{
-			global.opcode = strtok(line, " \t\n");
-			if (!global.opcode || *global.opcode == '#')
-			{
-				line_number++;
-				continue;
-			}
-
-			global.argument = strtok(NULL, " \t\n");
-			f = exec_op_func();
-			if (f == NULL)
-				err_unknown(line_number);
-			f(&stack, line_number);
+			line_number++;
+			continue;
 		}
+
+		global.opcode = strtok(global.line, " \t\n");
+		if (!global.opcode)
+		{
+			line_number++;
+			continue;
+		}
+
+		global.argument = strtok(NULL, " \t\n");
+		f = exec_op_func();
+		if (f == NULL)
+			err_unknown(line_number);
+		f(&stack, line_number);
 		line_number++;
 	}
-
 	free_stack(stack);
-	free(line);
+	free(global.line);
 	fclose(global.stream);
 	exit(EXIT_SUCCESS);
 }
