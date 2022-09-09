@@ -15,6 +15,7 @@ void(*exec_op_func(void))(stack_s * *stack, unsigned int line_number)
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
+		{"pop", pop},
 		{NULL, NULL}
 	};
 	int i = 0;

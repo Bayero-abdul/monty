@@ -38,6 +38,26 @@ void push(stack_s **stack, unsigned int line_number)
 	}
 }
 
+/**
+ * pop - removes the top element of the stack
+ * @stack: stack
+ * @line_number: line number current been executed
+ */
+void pop(stack_s **stack, unsigned int line_number)
+{
+	stack_s *temp;
+
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	temp = *stack;
+	*stack = (*stack)->next;
+	free(temp);
+}
+
 
 /**
  * pall - print all elements in the stack
@@ -73,6 +93,6 @@ void pint(stack_s **stack, unsigned int line_number)
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	else
-		printf("%d\n", (*stack)->n);
+
+	printf("%d\n", (*stack)->n);
 }

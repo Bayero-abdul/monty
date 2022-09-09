@@ -55,6 +55,7 @@ extern line_s global;
 
 /* stack functions */
 void push(stack_s **stack, unsigned int line_number);
+void pop(stack_s **stack, unsigned int line_number);
 void pall(stack_s **stack, unsigned int line_number);
 void pint(stack_s **stack, unsigned int line_number);
 
