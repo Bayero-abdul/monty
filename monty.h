@@ -59,6 +59,9 @@ void pop(stack_s **stack, unsigned int line_number);
 void pall(stack_s **stack, unsigned int line_number);
 void pint(stack_s **stack, unsigned int line_number);
 
+/* ops.c */
+void swap(stack_s **stack, unsigned int line_number);
+
 /* exec_funcs */
 void (*exec_op_func(void))(stack_s **stack, unsigned int line_number);
 
@@ -67,6 +70,7 @@ void err_malloc(void);
 void err_open(char *filename);
 void err_usage(void);
 void err_unknown(unsigned int line_number);
+void err_less_than_2(unsigned int line_number);
 
 /* utility functions */
 int is_num(void);
