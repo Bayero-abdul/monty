@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
 #include "monty.h"
@@ -9,27 +10,17 @@
  */
 int is_num(void)
 {
-	char *num = global->toks[1];
+	char *num = global.argument;
 
-	if (*num != '0' && atoi(num) == 0)
-		return (-1);
-	else
-		return (0);
+	while (*num != '\0')
+	{
+		if (!isdigit(*num) && atoi(num) == 0)
+			return (-1);
+		num++;
+	}
+	return (0);
 }
 
-
-/**
- * get_line - gets a line in a file
- * @lineptr: pointer to line
- * @stream: pointer to a file
- * Return: line length if failed return -1
- */
-int get_line(char *lineptr, FILE *stream)
-{
-	if (fgets(lineptr, 1024, stream) == NULL)
-		return (-1);
-	return (strlen(lineptr));
-}
 
 
 /**

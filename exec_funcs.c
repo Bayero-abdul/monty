@@ -20,9 +20,9 @@ void(*exec_op_func(void))(stack_s * *stack, unsigned int line_number)
 
 	while (ops[i].opcode != NULL)
 	{
-		if (strcmp(ops[i].opcode, global->toks[0]) == 0)
+		if (strcmp(ops[i].opcode, global.opcode) == 0)
 			return (ops[i].f);
 		i++;
 	}
-	return (ops[i].f);
+	return (NULL);
 }

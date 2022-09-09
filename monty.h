@@ -45,17 +45,13 @@ typedef struct instruction_s
 typedef struct line_s
 {
 	FILE *stream;
-	char *toks[2];
+	char *opcode;
+	char *argument;
+	char *line;
 } line_s;
 
 /* global varaible */
-extern line_s global[];
-
-/* parse function */
-void parse(char *line);
-
-/* monty.c */
-void err_usage(void);
+extern line_s global;
 
 /* stack functions */
 void push(stack_s **stack, unsigned int line_number);
@@ -65,12 +61,13 @@ void pall(stack_s **stack, unsigned int line_number);
 void (*exec_op_func(void))(stack_s **stack, unsigned int line_number);
 
 /* error functions */
-void err_malloc(stack_s *stack);
+void err_malloc(void);
+void err_open(char *filename);
+void err_usage(void);
 void err_unknown(unsigned int line_number);
 
 /* utility functions */
 int is_num(void);
 void free_stack(stack_s *stack);
-int get_line(char *lineptr, FILE *stream);
 
 #endif /* MONTY_H */

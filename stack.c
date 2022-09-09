@@ -12,11 +12,8 @@ void push(stack_s **stack, unsigned int line_number)
 	stack_s *new_node;
 	(void)line_number;
 
-	if (is_num() == -1 || global->toks[1] == NULL)
+	if (is_num() == -1 || global.argument == NULL)
 	{
-		if (*stack == NULL)
-			free_stack(*stack);
-		fclose(global->stream);
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
@@ -24,10 +21,10 @@ void push(stack_s **stack, unsigned int line_number)
 	new_node = malloc(sizeof(*new_node));
 	if (!new_node)
 	{
-		err_malloc(*stack);
+		err_malloc();
 	}
 
-	new_node->n = atoi(global->toks[1]); /* assign integer to a variable */
+	new_node->n = atoi(global.argument); /* assign integer to a variable */
 	new_node->prev = NULL;
 	new_node->next = NULL;
 
@@ -52,13 +49,13 @@ void pall(stack_s **stack, unsigned int line_number)
 	stack_s *current;
 	(void)line_number;
 
-	if (*stack == NULL)
-		return;
-
-	current = *stack;
-	while (current == NULL)
+	if (*stack != NULL)
 	{
-		printf("%d\n", current->n);
-		current = current->next;
+		current = *stack;
+		while (current != NULL)
+		{
+			printf("%d\n", current->n);
+			current = current->next;
+		}
 	}
 }
