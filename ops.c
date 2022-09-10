@@ -62,8 +62,6 @@ void pstr_t(stack_s **stack, unsigned int line_number)
 	{
 		if (is_ascii == 1)
 			putchar(current->n);
-		else if (current->n == 0)
-			break;
 		else
 			break;
 
