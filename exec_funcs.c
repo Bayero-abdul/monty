@@ -25,6 +25,7 @@ void(*exec_op_func(void))(stack_s * *stack, unsigned int line_number)
 		{"pchar", pchar_t},
 		{"pstr", pstr_t},
 		{"rotl", rotl_t},
+		{"rotr", rotl_t},
 		{NULL, NULL}
 	};
 	int i = 0;
