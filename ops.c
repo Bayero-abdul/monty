@@ -57,15 +57,13 @@ void pstr_t(stack_s **stack, unsigned int line_number)
 	(void)line_number;
 
 	current = *stack;
-	is_ascii = current->n >= 0 && current->n <= 127;
 	while (current && current->n != 0)
 	{
+		is_ascii = current->n >= 0 && current->n <= 127;
 		if (is_ascii == 1)
 			putchar(current->n);
 		else
 			break;
-
-		is_ascii = current->n >= 0 && current->n <= 127;
 		current = current->next;
 	}
 	printf("\n");
