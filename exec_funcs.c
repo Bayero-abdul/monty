@@ -22,6 +22,7 @@ void(*exec_op_func(void))(stack_s * *stack, unsigned int line_number)
 		{"div", div_s},
 		{"mul", mul_s},
 		{"mod", mod_s},
+		{"pchar", pchar_t},
 		{NULL, NULL}
 	};
 	int i = 0;
