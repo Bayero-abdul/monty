@@ -71,6 +71,7 @@ void mod_s(stack_s **stack, unsigned int line_number);
 void pchar_t(stack_s **stack, unsigned int line_number);
 void pstr_t(stack_s **stack, unsigned int line_number);
 void rotl_t(stack_s **stack, unsigned int line_number);
+void rotr_t(stack_s **stack, unsigned int line_number);
 
 /* exec_funcs */
 void (*exec_op_func(void))(stack_s **stack, unsigned int line_number);
