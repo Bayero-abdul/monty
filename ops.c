@@ -80,12 +80,12 @@ void rotl_t(stack_s **stack, unsigned int line_number)
 	stack_s *top, *last;
 	(void)line_number;
 
-	if (*stack == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 		return;
 
 	top = *stack;
 
-	*stack = (*stack)->next;
+	*stack = top->next;
 	(*stack)->next->prev = NULL;
 
 	last = *stack;
