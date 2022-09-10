@@ -68,3 +68,26 @@ void pstr_t(stack_s **stack, unsigned int line_number)
 	}
 	printf("\n");
 }
+
+/**
+* rotl_t - rotates the stack to the top; the top element of the stack becomes
+* the last one, and the second element of the stack becomes the first one
+* @stack: stack
+* @line_number: line number current been executed
+*/
+void rotl_t(stack_s **stack, unsigned int line_number)
+{
+	stack_s *top, *last;
+	(void)line_number;
+
+	top = *stack;
+	*stack = (*stack)->next;
+
+	last = *stack;
+	while (last && last->next)
+		last = last->next;
+
+	last->next = top;
+	top->next = NULL;
+	top->prev = last;
+}
