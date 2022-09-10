@@ -44,3 +44,18 @@ void pchar_t(stack_s **stack, unsigned int line_number)
 
 	printf("%c\n", (*stack)->n);
 }
+
+/**
+* pstr_t - prints the string starting at the top of the stack
+* @stack: stack
+* @line_number: line number current been executed
+*/
+void pstr_t(stack_s **stack, unsigned int line_number)
+{
+	int is_ascii = (*stack)->n >= 0 || (*stack)->n <= 127 ? 1 : 0;
+	(void)line_number;
+
+	while (*stack != NULL || is_ascii || (*stack)->n != 0)
+		printf("%c", (*stack)->n);
+	printf("\n");
+}
