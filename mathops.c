@@ -123,6 +123,12 @@ void mod_s(stack_s **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
 	mod = (*stack)->next->n % (*stack)->n;
 	(*stack)->next->n = mod;
 	temp = *stack;
