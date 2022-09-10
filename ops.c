@@ -107,22 +107,32 @@ void rotl_t(stack_s **stack, unsigned int line_number)
 */
 void rotr_t(stack_s **stack, unsigned int line_number)
 {
-	stack_s *top, *last;
+	stack_s *last, *temp;
 	(void)line_number;
 
+	last = *stack;
 	if ((*stack == NULL) || ((*stack)->next == NULL))
 		return;
 
-	top = *stack;
+	if (last->next->next == NULL) /* if two elements only */
+	{
+		temp = (*stack)->next;
+		(*stack)->next = NULL;
+		temp->next = *stack;
+		(*stack)->prev = temp;
+		*stack = temp;
+		(*stack)->prev = NULL;
+	}
+	else
+	{
+		while (last->next->next)
+			last = last->next;
 
-	*stack = (*stack)->next;
-	top->next->prev = NULL;
-
-	last = *stack;
-	while (last->next)
-		last = last->next;
-
-	last->next = top;
-	top->prev = last;
-	top->next = NULL;
+		last->next->prev = NULL;
+		temp = last->next;
+		last->next = NULL;
+		temp->next = *stack;
+		(*stack)->prev = temp;
+		*stack = temp;
+	}
 }
