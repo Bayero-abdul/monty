@@ -52,10 +52,23 @@ void pchar_t(stack_s **stack, unsigned int line_number)
 */
 void pstr_t(stack_s **stack, unsigned int line_number)
 {
-	int is_ascii = (*stack)->n >= 0 || (*stack)->n <= 127 ? 1 : 0;
+	stack_s *current;
+	int is_ascii;
 	(void)line_number;
 
-	while (*stack != NULL || is_ascii || (*stack)->n != 0)
-		printf("%c", (*stack)->n);
+	current = *stack;
+	is_ascii = current->n >= 0 && current->n <= 127;
+	while (current && current->n != 0)
+	{
+		if (is_ascii == 1)
+			putchar(current->n);
+		else if (current->n == 0)
+			break;
+		else
+			break;
+
+		is_ascii = current->n >= 0 && current->n <= 127;
+		current = current->next;
+	}
 	printf("\n");
 }
