@@ -35,6 +35,7 @@ typedef struct instruction_s
 	void (*f)(stack_s **stack, unsigned int line_number);
 } instruction_t;
 
+
 /**
  * struct line_s - file stream and tokens
  * @stream: the FILE stream
@@ -44,10 +45,11 @@ typedef struct instruction_s
  */
 typedef struct global_s
 {
-	FILE *stream;
+	char *mode;
 	char *opcode;
 	char *argument;
 	char *line;
+	stack_s *rear;
 } global_s;
 
 /* global varaible */
@@ -58,6 +60,7 @@ void push(stack_s **stack, unsigned int line_number);
 void pop(stack_s **stack, unsigned int line_number);
 void pall(stack_s **stack, unsigned int line_number);
 void pint(stack_s **stack, unsigned int line_number);
+void enqueue(stack_s **stack);
 
 /* ops.c */
 void swap(stack_s **stack, unsigned int line_number);
@@ -85,5 +88,6 @@ void err_unknown(unsigned int line_number);
 /* utility functions */
 int is_num(void);
 void free_stack(stack_s *stack);
+void set_mode(stack_s **stack, unsigned int line_number);
 
 #endif /* MONTY_H */

@@ -26,6 +26,8 @@ void(*exec_op_func(void))(stack_s * *stack, unsigned int line_number)
 		{"pstr", pstr_t},
 		{"rotl", rotl_t},
 		{"rotr", rotr_t},
+		{"queue", set_mode},
+		{"stack", set_mode},
 		{NULL, NULL}
 	};
 	int i = 0;

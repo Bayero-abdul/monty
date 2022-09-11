@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "monty.h"
 
-global_s global = {NULL, NULL, NULL, NULL};
+global_s global = {NULL, NULL, NULL, NULL, NULL};
 
 /**
  * main - runs the monty program
@@ -14,6 +14,7 @@ global_s global = {NULL, NULL, NULL, NULL};
  */
 int main(int argc, char *argv[])
 {
+	FILE *stream;
 	ssize_t nread;
 	size_t len = 0;
 	stack_s *stack = NULL;
@@ -23,11 +24,11 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 		err_usage();
 
-	global.stream = fopen(argv[1], "r");
-	if (global.stream == NULL)
+	stream = fopen(argv[1], "r");
+	if (stream == NULL)
 		err_open(argv[1]);
 
-	while ((nread = getline(&global.line, &len, global.stream)) != -1)
+	while ((nread = getline(&global.line, &len, stream)) != -1)
 	{
 		if (*global.line == '\n')
 		{
@@ -41,7 +42,6 @@ int main(int argc, char *argv[])
 			line_number++;
 			continue;
 		}
-
 		global.argument = strtok(NULL, " \t\n");
 		f = exec_op_func();
 		if (f == NULL)
@@ -51,35 +51,7 @@ int main(int argc, char *argv[])
 	}
 	free_stack(stack);
 	free(global.line);
-	fclose(global.stream);
+	free(global.mode);
+	fclose(stream);
 	exit(EXIT_SUCCESS);
-}
-
-/**
- * err_open - prints error if file can't open
- * @filename: the file
- */
-void err_open(char *filename)
-{
-	fprintf(stderr, "Error: Can't open file %s\n", filename);
-	exit(EXIT_FAILURE);
-}
-
-/**
- * err_usage - prints error if less or more arguments are given
- */
-void err_usage(void)
-{
-	fprintf(stderr, "USAGE: monty file\n");
-	exit(EXIT_FAILURE);
-}
-
-/**
- * err_unknown - prints error when an unknown instruction is given
- * @line_number: line_number of the instruction
- */
-void err_unknown(unsigned int line_number)
-{
-	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, global.opcode);
-	exit(EXIT_FAILURE);
 }

@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
@@ -22,6 +23,25 @@ int is_num(void)
 		num++;
 	}
 	return (0);
+}
+
+/**
+ * set_mode - set the mode of the program to either stack
+ * or queue
+ * @stack: the stack
+ * @line_number: the line current executed
+ */
+void set_mode(stack_s **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+
+	if (global.opcode)
+	{
+		if (global.mode)
+			free(global.mode);
+		global.mode = strdup(global.opcode);
+	}
 }
 
 /**

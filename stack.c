@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include "monty.h"
 
@@ -18,24 +19,30 @@ void push(stack_s **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	new_node = malloc(sizeof(*new_node));
-	if (!new_node)
+	if (global.mode == NULL || strcmp(global.mode, "stack") == 0)
 	{
-		err_malloc();
-	}
+		new_node = malloc(sizeof(*new_node));
+		if (!new_node)
+			err_malloc();
 
-	new_node->n = atoi(global.argument); /* assign integer to a variable */
-	new_node->prev = NULL;
-	new_node->next = NULL;
+		new_node->n = atoi(global.argument); /* assign integer to a variable */
+		new_node->prev = NULL;
+		new_node->next = NULL;
 
-	if (*stack == NULL)
-		*stack = new_node;
-	else
-	{
-		(*stack)->prev = new_node;
-		new_node->next = *stack;
-		*stack = new_node;
+		if (*stack == NULL)
+		{
+			*stack = new_node;
+			global.rear = new_node;
+		}
+		else
+		{
+			(*stack)->prev = new_node;
+			new_node->next = *stack;
+			*stack = new_node;
+		}
 	}
+	else if (strcmp(global.mode, "queue") == 0)
+		enqueue(stack);
 }
 
 /**
@@ -95,4 +102,32 @@ void pint(stack_s **stack, unsigned int line_number)
 	}
 
 	printf("%d\n", (*stack)->n);
+}
+
+
+/**
+ * enqueue - Add element at the end of the stack
+ * @stack: the stack
+ * Return: void
+ */
+void enqueue(stack_s **stack)
+{
+	stack_s *new_node = malloc(sizeof(*new_node));
+
+	if (new_node == NULL)
+		err_malloc();
+
+	new_node->n = atoi(global.argument);
+	new_node->prev = NULL;
+	new_node->next = NULL;
+	if (*stack == NULL)
+	{
+		*stack = new_node;
+		global.rear = new_node;
+		return;
+	}
+
+	global.rear->next = new_node;
+	new_node->prev = global.rear;
+	global.rear = new_node;
 }
